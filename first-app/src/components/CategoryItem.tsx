@@ -11,7 +11,7 @@ export default function CategoryItem({
   return (
     <TouchableOpacity className="mr-4 items-center" onPress={onPress}>
       <View
-        className={`w-15 h-14 rounded-full items-center justify-center mb-2 ${isSelected ? "bg-primary" : "bg-surface"}`}
+        className={`w-14 h-14 rounded-full items-center justify-center mb-2 ${isSelected ? "bg-primary" : "bg-surface"}`}
       >
         <Ionicons
           name={item.icon as any}
