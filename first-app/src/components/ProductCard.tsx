@@ -3,9 +3,11 @@ import { Link } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../constants";
 import { ProductCardProps } from "../../constants/types";
+import { useWishlist } from "@/context/WishlistContext";
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const isLinked = false;
+  const {toggleWishlist,isInWishlist}=useWishlist()
+  const isLinked = isInWishlist(product._id)
   return (
     <Link href={`/product/${product._id}`} asChild>
       <TouchableOpacity className="w-[48%] mb-4 bg-white rounded-lg overflow-hidden">
@@ -20,6 +22,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="absolute top-2 right-2 z-10 p-2 bg-white rounded-full shadow-sm"
             onPress={(e) => {
               e.stopPropagation();
+              toggleWishlist(product)
             }}
           >
             <Ionicons
