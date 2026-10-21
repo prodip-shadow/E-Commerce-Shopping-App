@@ -68,6 +68,8 @@ export default function Home() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
+
+                <View className="absolute inset-0 bg-black/40" />
                 <View className="absolute bottom-4 left-4 z-10">
                   <Text className="text-white text-2xl font-bold">
                     {banner.title}
@@ -81,7 +83,6 @@ export default function Home() {
                     </Text>
                   </TouchableOpacity>
                 </View>
-                <View className="absolute inset-0 bg-black/40" />
               </View>
             ))}
           </ScrollView>
@@ -148,7 +149,9 @@ export default function Home() {
             Subscribe to our newsletter and get 10% off your first purchase
           </Text>
           <TouchableOpacity className="bg-primary w-4/5 py-3 rounded-full items-center">
-            <Text className="text-white font-medium text-base">Subscribe Now</Text>
+            <Text className="text-white font-medium text-base">
+              Subscribe Now
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
