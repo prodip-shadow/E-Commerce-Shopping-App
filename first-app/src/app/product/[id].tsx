@@ -33,13 +33,14 @@ export default function ProductDetails() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const fetchProduct = async () => {
-    setProduct(dummyProducts.find((product) => product._id === id) as any);
+    const found: any = dummyProducts.find((product) => product._id === id);
+    setProduct(found ?? null);
     setLoading(false);
   };
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [id]);
 
   if (loading) {
     return (
@@ -72,7 +73,7 @@ export default function ProductDetails() {
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white">
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Image Carosoul */}
         <View className="relative h-[450px] bg-gray-100 mb-6  ">
@@ -206,6 +207,6 @@ export default function ProductDetails() {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

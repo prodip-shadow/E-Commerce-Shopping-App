@@ -2,8 +2,8 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast, { InfoToast } from "react-native-toast-message";
 import "../../global.css";
-import Toast from "react-native-toast-message";
 
 export default function RootLayout() {
   return (
@@ -12,7 +12,19 @@ export default function RootLayout() {
         <WishlistProvider>
           <Stack screenOptions={{ headerShown: false }} />
 
-          <Toast />
+          <Toast
+            config={{
+              info: (props) => (
+                <InfoToast
+                  {...props}
+                  touchableContainerProps={{
+                    accessibilityRole: "alert",
+                    accessibilityLiveRegion: "assertive",
+                  }}
+                />
+              ),
+            }}
+          />
         </WishlistProvider>
       </CartProvider>
     </GestureHandlerRootView>
