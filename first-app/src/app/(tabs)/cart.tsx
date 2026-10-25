@@ -17,7 +17,7 @@ export default function Cart() {
 
       {cartItems.length > 0 ? (
         <>
-          <ScrollView className="flex-1 px-4 mt-4">
+          <ScrollView className="flex-1 px-4 mt-4" showsVerticalScrollIndicator={false}>
             {cartItems.map((item, index) => (
               // <Text key={index}>{item.product.name}</Text>
               <CartItem
