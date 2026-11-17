@@ -104,7 +104,7 @@ export default function Shop() {
               <View className="py-4">
                 <ActivityIndicator size={"large"} color={COLORS.primary} />
               </View>
-            ) : null
+            ) : undefined
           }
           ListEmptyComponent={
             !loading && (
