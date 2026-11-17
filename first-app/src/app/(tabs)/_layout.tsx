@@ -30,7 +30,7 @@ export default function TabLayout() {
             <Ionicons
               name={focused ? "home" : "home-outline"}
               size={26}
-              color={color}
+              color={typeof color === "string" ? color : String(COLORS.primary)}
             />
           ),
         }}
@@ -44,13 +44,15 @@ export default function TabLayout() {
               <Feather
                 name={focused ? "shopping-cart" : "shopping-cart"}
                 size={26}
-                color={color}
+                color={
+                  typeof color === "string" ? color : String(COLORS.primary)
+                }
               />
-              {cartItems?.length > 0 &&
-              <View className="absolute -top-2 -right-2 bg-accent size-3 rounded-full items-center justify-center">
-                <Ionicons name="ellipse" size={6} color={'white'}/>
-              </View>
-              }
+              {cartItems?.length > 0 && (
+                <View className="absolute -top-2 -right-2 bg-accent size-3 rounded-full items-center justify-center">
+                  <Ionicons name="ellipse" size={6} color={"white"} />
+                </View>
+              )}
             </View>
           ),
         }}
@@ -63,7 +65,7 @@ export default function TabLayout() {
             <Ionicons
               name={focused ? "heart" : "heart-outline"}
               size={26}
-              color={color}
+              color={typeof color === "string" ? color : String(COLORS.primary)}
             />
           ),
         }}
@@ -76,7 +78,7 @@ export default function TabLayout() {
             <Ionicons
               name={focused ? "person" : "person-outline"}
               size={26}
-              color={color}
+              color={typeof color === "string" ? color : String(COLORS.primary)}
             />
           ),
         }}
