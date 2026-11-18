@@ -3,10 +3,14 @@ import express, { Request, Response } from 'express';
 import cors from "cors";
 import { clerkMiddleware } from '@clerk/express'
 import connectDB from "./src/config/db.js";
+import { clerkWebhook } from "./src/controllers/webhooks.js";
 
 const app = express();
 
 await connectDB();
+
+
+app.post('/api/clerk',express.raw({type:'application/json'}),clerkWebhook)
 
 // Middleware
 app.use(cors())
