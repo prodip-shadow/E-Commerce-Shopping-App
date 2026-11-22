@@ -47,6 +47,10 @@ await makeAdmin();
 /*-------------------------------------------------Seed Dummy Products if no products exist-----------------------------------------------------------------------------------*/
 // await seedProducts(process.env.MONGODB_URI as string);
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+if (!process.env.VERCEL) {
+    app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+    });
+}
+
+export default app;
