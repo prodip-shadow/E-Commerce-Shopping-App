@@ -2,7 +2,7 @@ import { useCart } from "@/context/CartContext";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { View } from "react-native";
-import { COLORS } from "../../../constants";
+import { COLORS } from "../../constants";
 
 export default function TabLayout() {
   const { cartItems } = useCart();

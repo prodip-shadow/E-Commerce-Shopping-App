@@ -11,7 +11,7 @@ import { protect } from "../middlewares/auth.middleware.js";
 const CartRouter = express.Router();
 
 // Get user Cart
-CartRouter.get("/", getCart);
+CartRouter.get("/", protect, getCart);
 
 // Add Item to Cart
 CartRouter.post("/add", protect, addToCart);

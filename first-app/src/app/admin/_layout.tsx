@@ -2,12 +2,11 @@ import { Tabs, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { View, ActivityIndicator, TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { dummyUser } from "@/assets/assets";
-import { COLORS } from "../../../constants";
+import { COLORS } from "../../constants";
+import { useUser } from "@clerk/expo";
 
 export default function AdminLayout() {
-  const { user } = { user: dummyUser };
-  const isLoaded = true;
+  const { user,isLoaded } = useUser()
   const router = useRouter();
 
   useEffect(() => {

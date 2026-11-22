@@ -5,7 +5,7 @@ const productSchema = new Schema<IProduct>(
   {
     name: { type: String, required: true, trim: true },
     description: { type: String, required: true },
-    price: { type: Number, required: true, min: 9 },
+    price: { type: Number, required: true, min: 0 },
     images: [{ type: String }],
     sizes: [{ type: String }],
     category: {

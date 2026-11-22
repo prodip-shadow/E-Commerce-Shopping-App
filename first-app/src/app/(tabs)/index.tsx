@@ -1,4 +1,4 @@
-import { BANNERS, dummyProducts } from "@/assets/assets";
+import { BANNERS } from "@/assets/assets";
 import CategoryItem from "@/components/CategoryItem";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
@@ -14,8 +14,9 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { CATEGORIES } from "../../../constants";
-import { Product } from "../../../constants/types";
+import { CATEGORIES } from "../../constants";
+import { Product } from "../../constants/types";
+import api from "@/constants/api";
 
 const { width } = Dimensions.get("window");
 export default function Home() {
@@ -27,8 +28,18 @@ export default function Home() {
   const categories = [{ id: "all", name: "All", icon: "grid" }, ...CATEGORIES];
 
   const fetchProducts = async () => {
-    setProducts(dummyProducts);
-    setLoading(false);
+    try {
+      const {data}=await api.get('/products');
+      if(data.success){
+        setProducts(data.data);
+      }
+
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+    finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {

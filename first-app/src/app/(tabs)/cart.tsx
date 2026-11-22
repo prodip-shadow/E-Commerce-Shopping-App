@@ -23,10 +23,12 @@ export default function Cart() {
           >
             {cartItems.map((item, index) => (
               <CartItem
-                key={index}
+                key={item.id || index}
                 item={item}
-                onRemove={() => removeFromCart(item.id, item.size)}
-                onUpdateQuantity={(q) => updateQuantity(item.id, q, item.size)}
+                onRemove={() => removeFromCart(item.productId, item.size)}
+                onUpdateQuantity={(q) =>
+                  updateQuantity(item.productId, q, item.size)
+                }
               />
             ))}
           </ScrollView>
@@ -73,12 +75,9 @@ export default function Cart() {
         </>
       ) : (
         <View className="flex-1 items-center justify-center">
-          {" "}
-          <Text className="text-secondary text-lg">
-            Your cart is empty
-          </Text>{" "}
+          <Text className="text-secondary text-lg">Your cart is empty</Text>
           <TouchableOpacity onPress={() => router.push("/")} className="mt-4">
-            <Text className="text-primary font-bold">Start Shopping</Text>{" "}
+            <Text className="text-primary font-bold">Start Shopping</Text>
           </TouchableOpacity>
         </View>
       )}

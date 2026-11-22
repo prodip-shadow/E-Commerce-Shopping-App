@@ -86,6 +86,10 @@ export const createProduct = async (req: Request, res: Response) => {
 
     const productData = {
       ...req.body,
+      price: Number(req.body.price),
+      stock: Number(req.body.stock || 0),
+      isFeatured:
+        req.body.isFeatured === "true" || req.body.isFeatured === true,
       images: images,
       sizes,
     };
@@ -99,7 +103,10 @@ export const createProduct = async (req: Request, res: Response) => {
     const product = await Product.create(productData);
     res.status(201).json({ success: true, data: product });
   } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Error creating product:", error);
+    const status =
+      error.name === "ValidationError" || error.name === "CastError" ? 400 : 500;
+    res.status(status).json({ success: false, message: error.message });
   }
 };
 
@@ -113,7 +120,7 @@ export const updateProduct = async (req: Request, res: Response) => {
       if (Array.isArray(req.body.existingImages)) {
         images = [...req.body.existingImages];
       } else {
-        images = [...req.body.existingImages];
+        images = [req.body.existingImages];
       }
     }
 
