@@ -10,6 +10,7 @@ import CartRouter from "./routes/cart.route.js";
 import OrderRouter from "./routes/order.route.js";
 import AddressRouter from "./routes/address.route.js";
 import AdminRouter from "./routes/admin.route.js";
+import WishlistRouter from "./routes/wishlist.route.js";
 import { seedProducts } from "./scripts/seedProducts.js";
 
 const app = express();
@@ -38,6 +39,7 @@ app.use('/api/cart', CartRouter);
 app.use('/api/orders', OrderRouter);
 app.use('/api/addresses', AddressRouter);
 app.use('/api/admin', AdminRouter);
+app.use('/api/wishlist', WishlistRouter);
 
 
 
