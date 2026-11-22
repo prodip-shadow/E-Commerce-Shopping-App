@@ -1,4 +1,3 @@
-import { dummyProducts } from "@/assets/assets";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,8 +14,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-import { COLORS } from "../../../constants";
-import { Product } from "../../../constants/types";
+import { COLORS } from "../../constants";
+import { Product } from "../../constants/types";
+import api from "@/constants/api";
 
 const { width } = Dimensions.get("window");
 
@@ -33,9 +33,20 @@ export default function ProductDetails() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const fetchProduct = async () => {
-    const found: any = dummyProducts.find((product) => product._id === id);
-    setProduct(found ?? null);
-    setLoading(false);
+    try {
+      const { data } = await api.get(`/products/${id}`);
+      setProduct(data.data);
+
+    } catch (error:any) {
+      Toast.show({
+        type: "error",
+        text1: "Error fetching product",
+        text2: error.response?.data?.message || "An error occurred while fetching the product.",
+      });
+    }
+    finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {

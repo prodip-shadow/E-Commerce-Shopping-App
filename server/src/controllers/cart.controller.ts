@@ -128,7 +128,7 @@ export const updateCartItem = async (req: Request, res: Response) => {
 // DELETE /api/cart/item/:productId
 export const removeCartItem = async (req: Request, res: Response) => {
   try {
-    const { size } = req.body;
+    const size = (req.query.size as string) || req.body?.size;
     const cart = await Cart.findOne({ user: req.user._id });
 
     if (!cart || !size) {

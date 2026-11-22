@@ -4,21 +4,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, PROFILE_MENU } from "../../../constants";
+import { COLORS, PROFILE_MENU } from "../../constants";
 import { useClerk } from "@clerk/expo";
 
 export default function Profile() {
-  const { user,signOut } = useClerk()
+  const { user, signOut } = useClerk();
   const router = useRouter();
-
-
 
   const handleLogout = async () => {
     await signOut();
     router.replace("/sign-in");
-  }
-
-
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={["top"]}>
@@ -80,36 +76,41 @@ export default function Profile() {
               )}
             </View>
 
+            {/* Menu */}
 
-              {/* Menu */}
+            <View className="bg-white rounded-xl border border-gray-100/75 p-2 mb-4">
+              {PROFILE_MENU.map((item, index) => (
+                <TouchableOpacity
+                  key={item.id}
+                  className={`flex-row items-center p-4 ${index !== PROFILE_MENU.length - 1 ? "border-b border-gray-100" : ""}`}
+                  onPress={() => router.push(item.route as any)}
+                >
+                  <View className="w-10 h-10 bg-surface rounded-full items-center justify-center mr-4">
+                    <Ionicons
+                      name={item.icon as any}
+                      size={20}
+                      color={COLORS.primary}
+                    />
+                  </View>
+                  <Text className="text-primary flex-1 font-medium">
+                    {item.title}
+                  </Text>
+                  <Ionicons
+                    name="chevron-forward"
+                    size={20}
+                    color={COLORS.secondary}
+                  />
+                </TouchableOpacity>
+              ))}
+            </View>
 
-              <View className="bg-white rounded-xl border border-gray-100/75 p-2 mb-4">
-                {PROFILE_MENU.map((item, index) => (
-                  <TouchableOpacity
-                    key={item.id}
-                    className={`flex-row items-center p-4 ${index !== PROFILE_MENU.length - 1 ? "border-b border-gray-100" : ""}`}
-                    onPress={() => router.push(item.route as any)}
-                  >
-                    <View className="w-10 h-10 bg-surface rounded-full items-center justify-center mr-4">
-                      <Ionicons name={item.icon as any} size={20} color={COLORS.primary} />
-                    </View>
-                    <Text className="text-primary flex-1 font-medium">{item.title}</Text>
-                    <Ionicons name='chevron-forward' size={20} color={COLORS.secondary} />
-                  </TouchableOpacity>
-                ))}
-              </View>
-
-
-
-              {/* Logout button */}
-              <TouchableOpacity
-                onPress={handleLogout}
-                className="flex-row items-center justify-center p-4"
-              >
-                <Text className="text-red-500 font-bold ml-2">Logout</Text>
-              </TouchableOpacity>
-
-
+            {/* Logout button */}
+            <TouchableOpacity
+              onPress={handleLogout}
+              className="flex-row items-center justify-center p-4"
+            >
+              <Text className="text-red-500 font-bold ml-2">Logout</Text>
+            </TouchableOpacity>
           </>
         )}
       </ScrollView>

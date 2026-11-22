@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { COLORS } from "../../constants";
-import { CartItemProps } from "../../constants/types";
+import { COLORS } from "../constants";
+import { CartItemProps } from "../constants/types";
 
 export default function CartItem({
   item,
@@ -54,8 +54,9 @@ export default function CartItem({
               <Ionicons name="remove" size={16} color={COLORS.primary} />
             </TouchableOpacity>
 
-
-            <Text className="text-primary font-medium mx-3">{item.quantity}</Text>
+            <Text className="text-primary font-medium mx-3">
+              {item.quantity}
+            </Text>
 
             <TouchableOpacity
               className="p-1"

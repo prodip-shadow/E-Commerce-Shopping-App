@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
-import { COLORS } from "../../constants";
-import { CategoryItemProps } from "../../constants/types";
+import { COLORS } from "../constants";
+import { CategoryItemProps } from "../constants/types";
 
 export default function CategoryItem({
   item,
@@ -19,7 +19,11 @@ export default function CategoryItem({
           color={isSelected ? "#FFF" : COLORS.primary}
         />
       </View>
-      <Text className={`text-xs font-medium ${isSelected ? 'text-primary' : 'text-secondary'}`}>{item.name}</Text>
+      <Text
+        className={`text-xs font-medium ${isSelected ? "text-primary" : "text-secondary"}`}
+      >
+        {item.name}
+      </Text>
     </TouchableOpacity>
   );
 }

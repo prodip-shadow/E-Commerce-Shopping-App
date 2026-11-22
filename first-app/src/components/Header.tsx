@@ -1,8 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { COLORS } from "../../constants";
-import { HeaderProps } from "../../constants/types";
+import { COLORS } from "../constants";
+import { HeaderProps } from "../constants/types";
+import { useCart } from "@/context/CartContext";
 
 export default function Header({
   title,
@@ -13,7 +14,7 @@ export default function Header({
   showLogo,
 }: HeaderProps) {
   const router = useRouter();
-  const { itemCount } = { itemCount: 6 };
+  const { itemCount } = useCart();
 
   return (
     <View className="flex-row items-center justify-between px-4 py-3 bg-white">
@@ -40,13 +41,11 @@ export default function Header({
             style={{ width: 120, height: 26 }}
             resizeMode="contain"
           />
-        ) : (
-          title ? (
-            <Text className="text-xl font-bold text-primary text-center">
-              {title}
-            </Text>
-          ) : null
-        )}
+        ) : title ? (
+          <Text className="text-xl font-bold text-primary text-center">
+            {title}
+          </Text>
+        ) : null}
       </View>
 
       {/* Right Side: Search / Cart */}
@@ -66,9 +65,9 @@ export default function Header({
               <Ionicons name="bag-outline" size={24} color={COLORS.primary} />
               <View className="absolute -top-1 -right-1 bg-red-800 w-4 h-4  rounded-full items-center justify-center">
                 <Text className="text-white text-[10px] font-bold">
-                    {itemCount}
-                  </Text>
-                </View>
+                  {itemCount}
+                </Text>
+              </View>
             </View>
           </TouchableOpacity>
         )}
